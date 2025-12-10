@@ -1,0 +1,19 @@
+path: D:\BaiduNetdiskDownload\ultralytics-yolo11-20241124\ultralytics-yolo11-main\vcc
+train: # train images (relative to 'path')  16551 images
+  - train/images
+  - train/labels
+#  - images/train2007
+#  - images/val2012
+#  - images/val2007
+val: # val images (relative to 'path')  4952 images
+  - val/images
+  - val/labels
+test: # test images (optional)
+  - test/images
+  - test/labels
+
+# Classes
+names:
+  0：cashang
+  1：aocao
+  2：huahen
