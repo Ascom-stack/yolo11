@@ -15,7 +15,7 @@
 我们改进的模型（YOLO11n-ECR）包含：
 - **主干网络**: EIEStem + C3K2_Faster_EMA模块
 - **颈部网络**: BiFusion双向特征融合
-- **检测头**: 基于RepBlock的检测头
+
 
 模型配置文件：`ultralytics/cfg/models/11/yolo11n-ecr.yaml`
 
