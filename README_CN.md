@@ -1,24 +1,7 @@
-# 基于边缘增强和双向特征融合的热轧钢带多尺度缺陷检测
 
-[![论文](https://img.shields.io/badge/论文-The%20Visual%20Computer-blue)](YOUR_DOI_HERE)
-[![代码](https://img.shields.io/badge/代码-GitHub-green)](YOUR_GITHUB_LINK)
-[![数据集](https://img.shields.io/badge/数据集-NEU--DET-orange)](http://faculty.neu.edu.cn/songkechen/zh_CN/zdylm/263270/list/)
 
-> **重要提示**: 本代码库与提交至 **The Visual Computer** 期刊的论文直接相关。如果您使用了本代码或发现它对您的研究有帮助，请引用我们的论文：
-> 
-> ```bibtex
-> @article{YOUR_CITATION_KEY,
->   title={基于边缘增强和双向特征融合的热轧钢带多尺度缺陷检测},
->   author={作者姓名},
->   journal={The Visual Computer},
->   year={2026},
->   doi={YOUR_DOI}
-> }
-> ```
+> **重要提示**: This code is the official implementation of the manuscript "Enhanced Multi-Scale Defect Detection on Steel Surfaces via Edge Enhancement and Feature Fusion" submitted to The Visual Computer. If you use this code or related results in your research, please cite the corresponding manuscript.
 
-## 摘要
-
-热轧钢带是工业制造中的基础材料，其表面纹理复杂且易产生各种缺陷。传统的人工检测方法存在劳动强度大、主观性强等局限性。机器视觉方法虽然前景广阔，但在复杂表面的多尺度缺陷检测方面仍面临挑战。本文提出了一种基于边缘增强和双向特征融合的新型多尺度缺陷检测方法。设计了边缘信息（EI）模块，用于削弱背景纹理干扰并增强缺陷边缘特征提取。C3K2-DB模块结合了Fasterblock和EMA多尺度注意力机制，强化了缺陷类别属性提取。构建了RepBiPAN双向特征融合网络，整合跨尺度的缺陷特征信息，提高检测精度。在NEU-DET数据集上的实验结果表明，相比基线模型，本方法在精确率（83.9%）、召回率（84.4%）和mAP@0.5（85.6%）方面均有显著提升，为工业应用提供了有价值的参考。
 
 ## 主要特点
 
@@ -53,9 +36,8 @@ pip install tqdm
 
 ### 硬件要求
 
-- **GPU**: 支持CUDA的NVIDIA显卡（推荐：RTX 3060或更高）
+- **GPU**: 支持CUDA的NVIDIA显卡（推荐：RTX 4060或更高）
 - **内存**: 最低16GB
-- **存储**: 10GB用于数据集和模型权重
 
 ## 数据集准备
 
@@ -193,21 +175,6 @@ results = model.predict(
 )
 ```
 
-## 实验结果
-
-### NEU-DET数据集性能
-
-| 模型 | 精确率 (%) | 召回率 (%) | mAP@0.5 (%) | 参数量 (M) | FLOPs (G) |
-|------|-----------|-----------|-------------|-----------|-----------|
-| YOLOv11n (基线) | - | - | - | 2.6 | 6.6 |
-| **YOLO11n-ECR (本文)** | **83.9** | **84.4** | **85.6** | - | - |
-
-### 主要改进
-
-- ✅ 通过EIEStem模块增强边缘特征提取
-- ✅ 使用BiFusion改进多尺度特征融合
-- ✅ 通过C3K2_Faster_EMA提升缺陷类别判别能力
-- ✅ 对各种缺陷类型和尺度实现鲁棒检测
 
 ## 项目结构
 
@@ -258,61 +225,7 @@ results = model.predict(
 4. **断点续训**: 使用`resume=True`并加载`last.pt`继续中断的训练
 5. **早停控制**: 调整`patience`参数控制早停策略
 
-## 常见问题
 
-### 1. 如何指定GPU训练？
-
-在`train.py`中添加`device`参数：
-```python
-model.train(
-    device='0',  # 使用第一块GPU
-    # 或 device='0,1' 使用多GPU
-    ...
-)
-```
-
-### 2. 如何修改类别数量？
-
-修改`yolo11n-ecr.yaml`中的`nc`参数：
-```yaml
-nc: 6  # 修改为你的类别数量
-```
-
-### 3. 如何保存COCO格式的结果？
-
-在`val.py`中添加：
-```python
-model.val(
-    save_json=True,  # 保存COCO格式结果
-    ...
-)
-```
-
-### 4. 训练时显存占用过高怎么办？
-
-- 减小batch size
-- 减小图像尺寸（imgsz）
-- 使用更小的模型变体
-
-### 5. 如何可视化训练过程？
-
-训练结果会自动保存在`runs/train/实验名称/`目录下，包括：
-- `results.png`: 训练曲线
-- `confusion_matrix.png`: 混淆矩阵
-- `val_batch*.jpg`: 验证批次可视化
-
-## 引用
-
-如果您使用了本代码或发现我们的工作有帮助，请引用我们的论文：
-
-```bibtex
-@article{YOUR_CITATION_KEY,
-  title={基于边缘增强和双向特征融合的热轧钢带多尺度缺陷检测},
-  author={作者姓名},
-  journal={The Visual Computer},
-  year={2026},
-  doi={YOUR_DOI}
-}
 ```
 
 ## 许可证
@@ -329,7 +242,7 @@ model.val(
 
 如有问题或建议，请：
 - 在GitHub上提交Issue
-- 联系邮箱：[您的邮箱]
+- 联系邮箱：[zhaoyulong2024@163.com]
 
 ## 相关资源
 
@@ -349,9 +262,5 @@ model.val(
 
 **可复现性声明**: 本仓库提供了复现论文实验结果所需的全部代码、配置和说明。我们致力于开放科学和透明的研究实践。
 
-**DOI分配**: 为确保代码和数据的长期可访问性和可引用性，我们建议：
-- 在GitHub上发布代码并创建Release版本
-- 通过Zenodo为代码分配DOI
-- 在论文中明确标注代码和数据的永久链接
 
 **论文相关性提醒**: 本代码库直接对应提交至The Visual Computer期刊的研究论文。使用本代码进行研究时，请务必引用相关论文。
